@@ -1,0 +1,343 @@
+/* ==========================================
+   Global Styles & Reset
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    /* Matching the purple gradient background from the start */
+    background: linear-gradient(135deg, #7b85fb 0%, #5c67ec 50%, #4e58db 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #1a1a1a;
+}
+
+h1, h2, h3, .logo {
+    font-family: 'Outfit', sans-serif;
+}
+
+/* ==========================================
+   Navigation Bar
+   ========================================== */
+.navbar {
+    background-color: #263146;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.nav-btn {
+    margin-left: auto;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50px;
+    transition: all 0.2s;
+}
+
+.nav-btn:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* ==========================================
+   Login Layout
+   ========================================== */
+.login-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.login-container {
+    background-color: #ffffff;
+    border-radius: 24px;
+    display: flex;
+    max-width: 1000px;
+    width: 100%;
+    min-height: 600px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+    overflow: hidden; /* Keeps the split panels inside the border radius */
+}
+
+/* --- Left Side (Brand/Info) --- */
+.login-brand {
+    flex: 1;
+    background-color: #214663; /* Dark slate matching the hero section */
+    padding: 60px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-brand h2 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.1;
+    z-index: 2;
+}
+
+.login-brand p {
+    font-size: 16px;
+    color: #b0b9cc;
+    line-height: 1.6;
+    z-index: 2;
+}
+
+/* Abstract background graphic */
+.brand-decoration {
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    width: 250px;
+    height: 250px;
+    background: linear-gradient(135deg, rgba(123, 133, 251, 0.2), rgba(92, 103, 236, 0.1));
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.deco-icon {
+    font-size: 80px;
+    opacity: 0.5;
+}
+
+/* --- Right Side (The Form) --- */
+.login-form-side {
+    flex: 1.2; /* Gives slightly more room to the form */
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-header {
+    margin-bottom: 40px;
+}
+
+.form-header h1 {
+    font-size: 32px;
+    color: #0f172a;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.form-header p {
+    color: #6b7280;
+    font-size: 15px;
+}
+
+/* Inputs */
+.input-group {
+    margin-bottom: 24px;
+}
+
+.password-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+}
+
+.forgot-link {
+    font-size: 13px;
+    color: #5c67ec;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+.input-group input[type="text"],
+.input-group input[type="password"] {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: inherit;
+    color: #1a1a1a;
+    transition: all 0.2s ease;
+    background-color: #f9fafb;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #263146;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(92, 103, 236, 0.1);
+}
+
+.password-input-wrap {
+    position: relative;
+}
+
+.input-group .password-input-wrap input[type="password"],
+.input-group .password-input-wrap input[type="text"] {
+    padding-right: 52px;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    display: inline-flex;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transform: translateY(-50%);
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: #6b7280;
+    cursor: pointer;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.password-toggle:hover {
+    background-color: rgba(107, 114, 128, 0.08);
+    color: #263146;
+}
+
+.password-toggle:focus-visible {
+    outline: 2px solid #5c67ec;
+    outline-offset: 1px;
+}
+
+.password-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Checkbox */
+.remember-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 32px;
+}
+
+.remember-group input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #5c67ec;
+    cursor: pointer;
+}
+
+.remember-group label {
+    font-size: 14px;
+    color: #4b5563;
+    cursor: pointer;
+}
+
+/* Submit Button */
+.submit-btn {
+    display: block;
+    width: auto;
+    margin-left: auto;
+    background-color: #263146;
+    color: #ffffff;
+    border: none;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.submit-btn:hover {
+    background-color: #1a2333;
+}
+
+/* Form Footer */
+.form-footer {
+    margin-top: 32px;
+    text-align: center;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.form-footer a {
+    color: #5c67ec;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.form-footer a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================
+   Responsive Design
+   ========================================== */
+@media (max-width: 900px) {
+    .login-container {
+        flex-direction: column;
+        max-width: 500px;
+    }
+
+    .login-brand {
+        padding: 40px;
+        text-align: center;
+    }
+
+    .brand-decoration {
+        display: none; /* Hide decoration on mobile */
+    }
+
+    .login-form-side {
+        padding: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-brand, .login-form-side {
+        padding: 30px 20px;
+    }
+    
+    .login-brand h2 {
+        font-size: 32px;
+    }
+}

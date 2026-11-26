@@ -1,0 +1,152 @@
+:root {
+    --app-bg: #f3f4f6;
+    --app-surface: #ffffff;
+    --app-text: #1f2937;
+    --app-heading: #111827;
+    --app-muted: #64748b;
+    --app-border: #dbe1e8;
+    --app-input: #f8fafc;
+}
+
+html[data-theme="dark"] {
+    --app-bg: #0b1220;
+    --app-surface: #172235;
+    --app-text: #e2e8f0;
+    --app-heading: #f8fafc;
+    --app-muted: #a3b1c5;
+    --app-border: #35445b;
+    --app-input: #101a2b;
+    color-scheme: dark;
+}
+
+html[data-theme="dark"] body {
+    color: var(--app-text);
+    background-color: var(--app-bg);
+    background-image: none;
+}
+
+html[data-theme="dark"] :is(.navbar, .nav-container, .onboarding-nav, .top-navbar, .sidebar, .sidebar-nav, .sidebar-header) {
+    color: var(--app-text);
+    background-color: var(--app-surface);
+    border-color: var(--app-border);
+}
+
+html[data-theme="dark"] :is(.main-content, .dashboard-content, .admin-tab) {
+    color: var(--app-text);
+    background-color: var(--app-bg);
+}
+
+html[data-theme="dark"] :is(
+    .features-section, .signup-container, .login-container, .onboarding-card,
+    .auth-recovery-card, .profile-header-card, .profile-card, .settings-card,
+    .chart-card, .ai-card, .stat-card, .admin-card, .admin-stat-card,
+    .user-modal-box, .modal-content, .alert-modal-box, .report-card, .report-section,
+    .alert-item, .table-container
+) {
+    color: var(--app-text);
+    background-color: var(--app-surface);
+    border-color: var(--app-border);
+}
+
+html[data-theme="dark"] :is(.feature-card, .card-blue, .card-green, .card-yellow) {
+    color: var(--app-text);
+    background-color: var(--app-surface);
+    border: 1px solid var(--app-border);
+}
+
+html[data-theme="dark"] :is(.tab-btn, .pill-tag) {
+    color: var(--app-text);
+    background-color: var(--app-input);
+    border-color: var(--app-border);
+}
+
+html[data-theme="dark"] .stats-cta-section {
+    background-color: #111827;
+}
+
+html[data-theme="dark"] :is(
+    .section-header h1, .section-header h2, .form-header h1,
+    .login-form-side, .signup-form-side, .onboarding-intro h1,
+    .onboarding-field label, .profile-card h2, .profile-card h3,
+    .info-item label, .info-item strong, .admin-table th,
+    .admin-table td, .alert-title, .alert-desc, .summary-label,
+    .report-title, .report-subtitle, .card-title, .card-text, .stat-label
+) {
+    color: var(--app-text);
+}
+
+html[data-theme="dark"] :is(
+    .section-header p, .form-header p, .onboarding-intro p,
+    .onboarding-intro .onboarding-user, .onboarding-actions p,
+    .field-hint, .user-email, .card-header p, .stat-title,
+    .stat-label, .alert-meta, .summary-label, .profile-description
+) {
+    color: var(--app-muted);
+}
+
+html[data-theme="dark"] :is(input, select, textarea),
+html[data-theme="dark"] .input-group :is(input, select, textarea),
+html[data-theme="dark"] .onboarding-field :is(input, select, textarea),
+html[data-theme="dark"] .admin-form :is(input, select, textarea) {
+    color: var(--app-text);
+    background-color: var(--app-input);
+    border-color: var(--app-border);
+}
+
+html[data-theme="dark"] :is(input, select, textarea)::placeholder {
+    color: #8290a5;
+}
+
+html[data-theme="dark"] :is(.admin-table, .report-table, .alert-list) {
+    color: var(--app-text);
+    background-color: var(--app-surface);
+}
+
+html[data-theme="dark"] :is(.admin-table th, .admin-table td, .report-table th, .report-table td) {
+    border-color: var(--app-border);
+}
+
+html[data-theme="dark"] :is(.chart-box, .chart-container, .line-chart-container, .chart-wrapper, .chart-legend, .rates-chart-wrapper, .status-menu, .notification-panel) {
+    color: var(--app-text);
+    background-color: var(--app-surface);
+    border-color: var(--app-border);
+}
+
+html[data-theme="dark"] svg :is(text, .axis-label) {
+    fill: var(--app-muted);
+}
+
+html[data-theme="dark"] svg :is(.grid-line, .axis-line) {
+    stroke: var(--app-border);
+}
+
+.global-header-actions {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-left: auto;
+}
+
+.global-theme-toggle {
+    display: inline-grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 auto;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    background: transparent;
+    color: inherit;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.global-theme-toggle:focus-visible {
+    outline: 3px solid #60a5fa;
+    outline-offset: 2px;
+}
+
+html[data-theme="dark"] .global-theme-toggle {
+    color: var(--app-text);
+}

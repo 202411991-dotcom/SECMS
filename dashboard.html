@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - AI Energy Monitor</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- External CSS Link -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/notifications.css">
+</head>
+<body>
+
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <span class="logo-text">SECMS</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item active">
+                <i class="fas fa-chart-pie" style="margin-right: 10px;"></i> Dashboard
+            </a>
+            <a href="consumption.html" class="nav-item">
+                <i class="fas fa-bolt" style="margin-right: 10px;"></i> Consumption
+            </a>
+            <a href="alerts.html" class="nav-item">
+                <i class="fas fa-bell" style="margin-right: 10px;"></i> Alerts
+            </a>
+            <a href="reports.html" class="nav-item">
+                <i class="fas fa-file-alt" style="margin-right: 10px;"></i> Reports
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="#" class="nav-item logout-btn" id="logoutBtn">
+                <i class="fas fa-sign-out-alt" style="margin-right: 10px; color: #ef4444;"></i> <span style="color: #ef4444;">Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <header class="top-navbar">
+            <h1 class="page-title">Energy Monitoring</h1>
+            <div class="user-profile" onclick="window.location.href='profile.html'" style="cursor: pointer;">
+                <div class="profile-info">
+                    <div class="avatar" id="userAvatar">E</div>
+                    <div class="user-details">
+                        <span class="user-name" id="userName">Loading...</span>
+                        <span class="user-email" id="userEmail">loading@example.com</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <div class="welcome-section" style="display: flex; align-items: center; gap: 20px; background: var(--bg-card); padding: 24px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 24px;">
+                <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Solar Panel" style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover;">
+                <div>
+                    <h2>Welcome back, <span id="welcomeName">User</span>! &#128075;</h2>
+                    <p id="currentDate">Thursday, November 5</p>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header"><span class="stat-badge badge-green">&#8593; 0%</span></div>
+                    <p class="stat-title">Monthly Usage</p>
+                    <h3 class="stat-value" id="dash-usage">0 kWh</h3>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header"><span class="stat-badge badge-green">&#8593; 0%</span></div>
+                    <p class="stat-title">Predicted Cost</p>
+                    <h3 class="stat-value" id="dash-cost">&#8369;0</h3>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header"><span class="stat-badge badge-green">&#9679; LIVE</span></div>
+                    <p class="stat-title">Meter Reading</p>
+                    <h3 class="stat-value" id="dash-meter">0.00 kWh</h3>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header"><span class="stat-badge badge-green">&#8593; 0%</span></div>
+                    <p class="stat-title">Previous Reading</p>
+                    <h3 class="stat-value" id="dash-previous">0.00 kWh</h3>
+                </div>
+            </div>
+
+            <div class="lower-grid">
+                <div class="chart-card">
+                    <div class="card-header">
+                        <div><h3>Consumption Trend</h3><p>Latest 6 months energy usage (kWh)</p></div>
+                        <button class="date-btn"><i class="fas fa-calendar-alt"></i> Last 6 months</button>
+                    </div>
+                    <div class="chart-container">
+                        <div class="y-axis" id="dynamic-y-axis"></div>
+                        <div class="bars-wrapper" id="dynamic-bars-wrapper"></div>
+                    </div>
+                </div>
+                <div class="ai-card">
+                    <div class="ai-card-header">
+                        <h3><i class="fas fa-robot"></i> AI Recommendations</h3>
+                        <button class="ai-refresh-btn" id="refresh-ai-recommendations" type="button">
+                            <i class="fas fa-rotate"></i> Refresh
+                        </button>
+                    </div>
+                    <div id="dynamic-ai-recommendations" aria-live="polite" aria-busy="false"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script/api.js"></script>
+    <script src="script/dashboard.js"></script>
+    <script src="script/theme.js"></script>
+    <script src="script/notifications.js"></script>
+</body>
+</html>

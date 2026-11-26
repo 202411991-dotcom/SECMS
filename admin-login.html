@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - SECMS</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Base CSS (Reusing from user login) -->
+    <link rel="stylesheet" href="css/login.css">
+    
+    <!-- Admin Theme Overrides -->
+    <style>
+        /* Dark Navy Sidebar matching the Admin Dashboard */
+        .login-brand {
+            background-color: #1e1e2d;
+        }
+        
+        /* Red accent for the icon */
+        .deco-icon {
+            color: #ef4444;
+        }
+
+        /* Red accent for the button */
+        .submit-btn {
+            background-color: #ffffff;
+            color: #1e1e2d;
+            border: 1px solid #ef4444;
+        }
+
+        .submit-btn:hover {
+            background-color: #ef4444;
+            color: #ffffff;
+        }
+
+        /* Red focus state for inputs */
+        .input-group input:focus {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+        }
+
+        /* Red links */
+        .forgot-link {
+            color: #ef4444;
+        }
+    </style>
+    <link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <nav class="navbar" style="background-color: #1e1e2d;">
+        <div class="nav-container">
+            <a href="index.html" class="logo" style="text-decoration: none; color: #ffffff;">SECMS</a>
+            <a href="login.html" class="nav-btn">Return to User Login</a>
+        </div>
+    </nav>
+
+    <!-- Login Main Container -->
+    <main class="login-wrapper">
+        
+        <div class="login-container">
+            
+            <!-- Left Side: Brand/Info -->
+            <div class="login-brand">
+                <h2>Admin Portal.</h2>
+                <p>Restricted access. Please log in with your administrator credentials to manage users, view reports, and broadcast alerts.</p>
+                
+                <!-- Decorative element -->
+                <div class="brand-decoration">
+                    <div class="deco-icon">🔒</div>
+                </div>
+            </div>
+
+            <!-- Right Side: The Form -->
+            <div class="login-form-side">
+                <div class="form-header">
+                    <h1>Admin Log In</h1>
+                    <p>Enter your admin credentials below.</p>
+                </div>
+
+                <!-- Form Element -->
+                <form class="login-form" id="adminLoginForm">
+                    
+                    <!-- Username Input -->
+                    <div class="input-group">
+                        <label for="admin-username">Admin Username</label>
+                        <input type="text" id="admin-username" placeholder="Enter admin username" required>
+                    </div>
+
+                    <!-- Password Input -->
+                    <div class="input-group">
+                        <div class="password-label-row">
+                            <label for="admin-password">Password</label>
+                        </div>
+                        <div class="password-input-wrap">
+                            <input type="password" id="admin-password" placeholder="Enter admin password" autocomplete="current-password" required>
+                            <button type="button" class="password-toggle" data-password-toggle aria-label="Show password" aria-controls="admin-password" aria-pressed="false">
+                                <svg data-eye-icon viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+                                <svg data-eye-off-icon viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden><path d="m3 3 18 18"/><path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/><path d="M9.9 5.2A10.7 10.7 0 0 1 12 5c6.4 0 10 7 10 7a14.8 14.8 0 0 1-3.1 3.9M6.2 6.2C3.5 8 2 12 2 12s3.6 7 10 7c1 0 2-.2 2.8-.5"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <p class="form-error" id="adminLoginError" role="alert" style="color:#dc2626;font-size:14px;margin:0 0 12px;" hidden></p>
+                    <!-- Submit Button -->
+                    <button type="submit" class="submit-btn">Access Admin Panel</button>
+                </form>
+
+                <div class="form-footer">
+                    <p style="font-size: 13px; color: #6b7280;">System Administrator Access Only</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- External JS for Login Logic -->
+    <script src="script/api.js"></script>
+    <script src="script/admin-login.js"></script>
+    <script src="script/password-toggle.js"></script>
+    <script src="script/theme.js"></script>
+</body>
+</html>

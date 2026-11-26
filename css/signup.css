@@ -1,0 +1,310 @@
+/* ==========================================
+   Global Styles & Reset
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #7b85fb 0%, #5c67ec 50%, #4e58db 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #1a1a1a;
+}
+
+h1, h2, h3, .logo {
+    font-family: 'Outfit', sans-serif;
+}
+
+/* ==========================================
+   Navigation Bar
+   ========================================== */
+.navbar {
+    background-color: #263146;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.nav-btn {
+    margin-left: auto;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50px;
+    transition: all 0.2s;
+}
+
+.nav-btn:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* ==========================================
+   Signup Layout
+   ========================================== */
+.signup-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.signup-container {
+    background-color: #ffffff;
+    border-radius: 24px;
+    display: flex;
+    max-width: 1050px;
+    width: 100%;
+    min-height: 650px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+/* --- Left Side (Brand/Info) --- */
+.signup-brand {
+    flex: 1;
+    background-color: #263146;
+    padding: 60px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.signup-brand h2 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.1;
+    z-index: 2;
+}
+
+.signup-brand p {
+    font-size: 16px;
+    color: #b0b9cc;
+    line-height: 1.6;
+    z-index: 2;
+}
+
+.brand-decoration {
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    width: 250px;
+    height: 250px;
+    background: linear-gradient(135deg, rgba(123, 133, 251, 0.2), rgba(92, 103, 236, 0.1));
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.deco-icon {
+    font-size: 80px;
+    opacity: 0.5;
+}
+
+/* --- Right Side (The Form) --- */
+.signup-form-side {
+    flex: 1.2;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-header {
+    margin-bottom: 30px;
+}
+
+.form-header h1 {
+    font-size: 32px;
+    color: #0f172a;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.form-header p {
+    color: #6b7280;
+    font-size: 15px;
+}
+
+/* Inputs */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+}
+
+.input-group input[type="text"],
+.input-group input[type="email"],
+.input-group input[type="password"] {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: inherit;
+    color: #1a1a1a;
+    transition: all 0.2s ease;
+    background-color: #f9fafb;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #5c67ec;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 4px rgba(92, 103, 236, 0.1);
+}
+
+/* Terms Checkbox */
+.terms-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
+.terms-group input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #5c67ec;
+    cursor: pointer;
+    margin-top: 3px;
+}
+
+.terms-group label {
+    font-size: 14px;
+    color: #4b5563;
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+.terms-group a {
+    color: #5c67ec;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.terms-group a:hover {
+    text-decoration: underline;
+}
+
+/* Error state for the terms checkbox */
+.terms-group.error label {
+    color: #ef4444; /* Red text */
+}
+
+.terms-group.error a {
+    color: #ef4444;
+    font-weight: 700;
+}
+
+.terms-group.error input[type="checkbox"] {
+    outline: 2px solid #ef4444;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    background-color: #ffffff;
+    color: #263146;
+    border: 1px solid #263146;
+    padding: 16px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.submit-btn:hover {
+    background-color: #263146;
+    color: #ffffff;
+}
+
+/* Form Footer */
+.form-footer {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.form-footer a {
+    color: #5c67ec;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.form-footer a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================
+   Responsive Design
+   ========================================== */
+@media (max-width: 900px) {
+    .signup-container {
+        flex-direction: column;
+        max-width: 500px;
+    }
+
+    .signup-brand {
+        padding: 40px;
+        text-align: center;
+    }
+
+    .brand-decoration {
+        display: none;
+    }
+
+    .signup-form-side {
+        padding: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .signup-brand, .signup-form-side {
+        padding: 30px 20px;
+    }
+    
+    .signup-brand h2 {
+        font-size: 32px;
+    }
+}

@@ -1,0 +1,23 @@
+export const ELECTRICITY_PROVIDERS = [
+    'Meralco',
+    'OEDC (Olongapo Electricity Distribution Company)',
+    'ZAMECO I',
+    'ZAMECO II',
+    'Subic EnerZone',
+    'AEC (Angeles Electric Corporation)',
+    'PELCO I',
+    'PELCO II',
+    'PELCO III',
+    'SFELAPCO',
+    'Clark Electric (CEDC)',
+    'PENELCO',
+    'TEI (Tarlac Electric Inc.)',
+    'TARELCO I',
+    'TARELCO II',
+    'NEECO I',
+    'NEECO II - Area 1',
+    'NEECO II - Area 2',
+    'CELCOR',
+    'SAJELCO',
+    'AURELCO'
+];

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - AI Energy Intelligence</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- External CSS Links -->
+    <link rel="stylesheet" href="css/signup.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo" style="text-decoration: none;">SECMS</a>
+            <a href="index.html" class="nav-btn">Back Home</a>
+        </div>
+    </nav>
+
+    <!-- Sign Up Main Container -->
+    <main class="signup-wrapper">
+        
+        <div class="signup-container">
+            
+            <!-- Left Side: Brand/Info -->
+            <div class="signup-brand">
+                <h2>Join SECMS Community.</h2>
+                <p>Create an account to start tracking your household consumption, predicting your bills, and automating your energy savings with AI.</p>
+                
+                <!-- Decorative element -->
+                <div class="brand-decoration">
+                    <div class="deco-icon">🔋</div>
+                </div>
+            </div>
+
+            <!-- Right Side: The Form -->
+            <div class="signup-form-side">
+                <div class="form-header">
+                    <h1>Create Account</h1>
+                    <p>Sign up to get started with smart energy monitoring.</p>
+                </div>
+
+                <!-- Note: We removed action="login.html" so JS can validate first -->
+                <form class="signup-form">
+                    
+                    <!-- Full Name Input -->
+                    <div class="input-group">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" id="fullname" name="fullname" placeholder="John Doe" minlength="2" maxlength="100" required>
+                    </div>
+
+                    <!-- Account Number Input -->
+                    <div class="input-group">
+                        <label for="account-number">Account Number</label>
+                        <input type="text" id="account-number" name="account-number" placeholder="1234567890" pattern="[A-Za-z0-9_\x2d]{4,32}" title="Use 4 to 32 letters, numbers, hyphens, or underscores." required>
+                    </div>
+
+                    <!-- Email Input -->
+                    <div class="input-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                    </div>
+
+                    <!-- Password Input -->
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="At least 8 characters" minlength="8" maxlength="128" required>
+                    </div>
+
+                    <!-- Terms Checkbox -->
+                    <div class="terms-group">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">I agree to the <a href="#" id="openTermsBtn">Terms of Service</a> and <a href="#" id="openPrivacyBtn">Privacy Policy</a>.</label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <p class="form-error" id="signupError" role="alert" hidden></p>
+                    <button type="submit" class="submit-btn">Create Account</button>
+                </form>
+
+                <div class="form-footer">
+                    <p>Already have an account? <a href="login.html">Log in here</a></p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ==========================================
+         TERMS OF SERVICE MODAL
+         ========================================== -->
+    <div class="modal-overlay" id="termsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Terms of Service</h2>
+                <button class="close-modal" id="closeTermsBtn">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <p><em>Last updated: November 2026</em></p>
+
+                <h3>1. Acceptance of Terms</h3>
+                <p>By accessing and using the SECMS platform, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by these terms, please do not use this service.</p>
+
+                <h3>2. Description of Service</h3>
+                <p>SECMS provides AI-driven monitoring, predictive billing, and energy optimization recommendations for your household. You understand and agree that the service is provided "AS-IS" and that we assume no responsibility for the accuracy of predictions or the resulting savings.</p>
+
+                <h3>3. User Account & Data</h3>
+                <p>To use certain features of the service, you must register for an account. You agree to provide accurate, current, and complete information during the registration process. You are responsible for safeguarding your account number and password.</p>
+                <p>We store your energy data to provide insights. By using the service, you consent to the collection and use of this information in accordance with our Privacy Policy.</p>
+
+                <h3>4. Privacy Policy</h3>
+                <p>Your use of the platform is also governed by our Privacy Policy. Please review our Privacy Policy, which also governs the Site and informs users of our data collection practices. We use industry-standard security measures to protect your data.</p>
+
+                <h3>5. Limitation of Liability</h3>
+                <p>In no event shall SECMS, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your access to or use of or inability to access or use the Service.</p>
+
+                <h3>6. Changes to Terms</h3>
+                <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. We will try to provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</p>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-modal-close" id="agreeTermsBtn">I Understand</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         PRIVACY POLICY MODAL
+         ========================================== -->
+    <div class="modal-overlay" id="privacyModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Privacy Policy</h2>
+                <button class="close-modal" id="closePrivacyBtn">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <p><em>Last updated: November 2026</em></p>
+
+                <h3>1. Information We Collect</h3>
+                <p>When you register for an account, we collect your Full Name, Account Number, Email Address, and Password. Additionally, we collect energy consumption data from your smart meters and connected appliances to provide our optimization services.</p>
+
+                <h3>2. How We Use Your Information</h3>
+                <p>We use the information we collect to:</p>
+                <ul>
+                    <li>Provide, maintain, and improve our AI-driven monitoring services.</li>
+                    <li>Generate accurate predictive billing and energy-saving recommendations.</li>
+                    <li>Send you technical notices, updates, and support messages.</li>
+                    <li>Respond to your comments, questions, and customer service requests.</li>
+                </ul>
+
+                <h3>3. Data Security</h3>
+                <p>We implement industry-standard security measures, including encryption and hashed passwords, to protect your personal information from unauthorized access, alteration, or destruction. However, no method of transmission over the Internet is 100% secure.</p>
+
+                <h3>4. Sharing of Information</h3>
+                <p>We do not sell, trade, or rent your personal identification information to others. We may share generic aggregated demographic information not linked to any personal identification regarding visitors and users with our business partners and trusted affiliates.</p>
+
+                <h3>5. Your Rights</h3>
+                <p>You have the right to access, update, or delete your personal information at any time through your Profile settings. If you wish to delete your account entirely, please contact our support team.</p>
+
+                <h3>6. Cookies</h3>
+                <p>Our Site may use "cookies" to enhance User experience. Web browsers place cookies on their hard drive for record-keeping purposes and sometimes to track information about them. You may choose to set your web browser to refuse cookies.</p>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-modal-close" id="agreePrivacyBtn">I Understand</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- External JS Links -->
+    <script src="script/api.js"></script>
+    <script src="script/signup.js"></script>
+    <script src="script/modal.js"></script>
+
+    <script src="script/theme.js"></script>
+</body>
+</html>

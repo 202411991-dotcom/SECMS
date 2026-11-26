@@ -1,0 +1,546 @@
+/* ==========================================
+   CSS Variables (Light / Dark Theme)
+   ========================================== */
+:root {
+    /* Light Theme (Default) */
+    --bg-main: #f3f4f6;
+    --bg-card: #ffffff;
+    --bg-sidebar: #0f172a;
+    --bg-sidebar-hover: #1e293b;
+    
+    --text-main: #1a1a1a;
+    --text-heading: #0f172a;
+    --text-muted: #64748b;
+    --text-sidebar: #94a3b8;
+    --text-sidebar-active: #ffffff;
+    
+    --border-color: #e5e7eb;
+    --shadow-card: 0 1px 3px rgba(0,0,0,0.05);
+    
+    /* Chart Placeholder */
+    --bg-chart: #f8fafc;
+}
+
+[data-theme="dark"] {
+    /* Dark Theme Overrides */
+    --bg-main: #0f172a;
+    --bg-card: #1e293b;
+    --bg-sidebar: #020617;
+    --bg-sidebar-hover: #1e293b;
+    
+    --text-main: #e2e8f0;
+    --text-heading: #f8fafc;
+    --text-muted: #94a3b8;
+    
+    --border-color: #334155;
+    --shadow-card: 0 4px 6px rgba(0,0,0,0.2);
+    
+    /* Chart Placeholder */
+    --bg-chart: #0f172a;
+}
+
+/* ==========================================
+   Global Styles & Reset
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-main);
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    color: var(--text-main);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-heading);
+}
+
+/* ==========================================
+   Sidebar
+   ========================================== */
+.sidebar {
+    width: 260px;
+    background-color: var(--bg-sidebar);
+    color: var(--text-sidebar-active);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-right: 1px solid var(--border-color);
+    transition: background-color 0.3s ease;
+}
+
+.sidebar-header {
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo-text {
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+    color: #ffffff;
+}
+
+.sidebar-nav {
+    padding: 20px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    color: var(--text-sidebar);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.nav-item:hover, .nav-item.active {
+    background-color: var(--bg-sidebar-hover);
+    color: var(--text-sidebar-active);
+}
+
+.nav-icon {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+}
+
+.sidebar-footer {
+    padding: 20px 12px;
+    border-top: 1px solid var(--border-color);
+}
+
+/* ==========================================
+   Main Content Area
+   ========================================== */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
+}
+
+/* Top Navbar */
+.top-navbar {
+    background-color: var(--bg-card);
+    padding: 16px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+}
+
+.page-title {
+    color: #2563eb;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: transform 0.2s;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-left: 1px solid var(--border-color);
+    padding-left: 20px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #0ea5e9;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text-heading);
+}
+
+.user-email {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* ==========================================
+   Dashboard Grid
+   ========================================== */
+.dashboard-content {
+    padding: 32px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.welcome-section {
+    margin-bottom: 32px;
+}
+
+.welcome-section h2 {
+    font-size: 28px;
+    margin-bottom: 4px;
+}
+
+.welcome-section p {
+    color: var(--text-muted);
+    font-size: 15px;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    /* Changed to 3 columns */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.stat-card {
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border-color);
+    transition: background-color 0.3s ease;
+}
+
+.stat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.stat-badge {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 20px;
+}
+
+.badge-green { background-color: rgba(22, 101, 52, 0.1); color: #22c55e; }
+
+.stat-title {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.stat-value {
+    font-size: 24px;
+    color: var(--text-heading);
+    font-weight: 700;
+}
+
+/* Lower Grid (Chart & AI) */
+.lower-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+.chart-card, .ai-card {
+    background-color: var(--bg-card);
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-card);
+    transition: background-color 0.3s ease;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+}
+
+.card-header h3 { font-size: 18px; margin-bottom: 4px; }
+.card-header p { color: var(--text-muted); font-size: 13px; }
+
+.date-btn {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--text-main);
+    cursor: pointer;
+}
+
+/* ==========================================
+   Bar Chart Styles
+   ========================================== */
+
+/* The main container holding the y-axis and the bars */
+.chart-container {
+    display: flex;
+    height: 280px; 
+    gap: 16px;
+    margin-top: 10px;
+    background-color: var(--bg-chart);
+    padding: 24px 24px 10px 24px;
+    border-radius: 12px;
+    position: relative;
+}
+
+/* The Y-axis labels on the left */
+.y-axis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--text-muted);
+    font-size: 11px;
+    padding-bottom: 30px; 
+    text-align: right;
+    width: 30px;
+}
+
+/* The container holding all the bars */
+.bars-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0; 
+    position: relative;
+}
+
+/* Individual bar group (Bar + Label) */
+.bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    width: 12%;
+    position: relative;
+    cursor: pointer;
+}
+
+/* The actual colored bar */
+.bar {
+    width: 100%;
+    border-radius: 6px 6px 0 0;
+    transition: all 0.3s ease;
+    animation: growBar 0.8s ease-out forwards;
+    transform-origin: bottom;
+}
+
+/* Hover effect */
+.bar-group:hover .bar {
+    filter: brightness(1.1);
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+/* Bar Colors */
+.bar-blue { background-color: #3b82f6; }
+.bar-purple { background-color: #8b5cf6; }
+.bar-green { background-color: #10b981; }
+.bar-yellow { background-color: #f59e0b; }
+
+/* The text labels below the bars (Jun, Jul, etc.) */
+.bar-label {
+    position: absolute;
+    bottom: -25px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-heading);
+}
+
+/* The tooltip that appears on hover */
+.bar-tooltip {
+    position: absolute;
+    top: -35px;
+    background-color: var(--bg-sidebar);
+    color: #ffffff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    transform: translateY(10px);
+    white-space: nowrap;
+    z-index: 10;
+}
+
+/* Tooltip arrow */
+.bar-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px 5px 0;
+    border-style: solid;
+    border-color: var(--bg-sidebar) transparent transparent transparent;
+}
+
+/* Show tooltip on hover */
+.bar-group:hover .bar-tooltip {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Keyframe animation to make the bars grow up from the bottom */
+@keyframes growBar {
+    0% {
+        transform: scaleY(0);
+    }
+    100% {
+        transform: scaleY(1);
+    }
+}
+
+/* ==========================================
+   AI Recommendations
+   ========================================== */
+.ai-card h3 {
+    font-size: 18px;
+    margin-bottom: 0;
+}
+
+.ai-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.ai-refresh-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 11px;
+    border: 1px solid var(--border-color);
+    border-radius: 7px;
+    background: var(--bg-card);
+    color: var(--text-main);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s ease, background-color 0.2s ease;
+}
+
+.ai-refresh-btn:hover:not(:disabled) {
+    background: var(--bg-chart);
+}
+
+.ai-refresh-btn:disabled {
+    opacity: 0.55;
+    cursor: wait;
+}
+
+.ai-state {
+    color: var(--text-main);
+}
+
+.ai-target {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.ai-alert {
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.ai-alert h4 {
+    font-size: 14px;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.ai-alert p {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* Alert Colors */
+.alert-blue { background-color: rgba(59, 130, 246, 0.1); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.2); }
+.alert-green { background-color: rgba(34, 197, 94, 0.1); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.2); }
+.alert-yellow { background-color: rgba(234, 179, 8, 0.1); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.2); }
+
+/* Light mode alert text fix */
+[data-theme="light"] .alert-blue { color: #1e3a8a; }
+[data-theme="light"] .alert-green { color: #166534; }
+[data-theme="light"] .alert-yellow { color: #854d0e; }
+
+/* ==========================================
+   Responsive Design
+   ========================================== */
+@media (max-width: 1024px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .lower-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+    .sidebar { display: none; }
+    .stats-grid { grid-template-columns: 1fr; }
+}

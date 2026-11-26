@@ -1,0 +1,307 @@
+/* ==========================================
+   Admin User Bill Status Dropdown & Stats
+   ========================================== */
+
+.status-dropdown-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.status-btn {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+}
+
+/* --- BILL SETUP STATUS COLORS --- */
+.status-btn.pending { background-color: #fef9c3; color: #ca8a04; }
+.status-btn.pending:hover { background-color: #fef08a; }
+
+.status-btn.paid { background-color: #dcfce7; color: #16a34a; }
+.status-btn.paid:hover { background-color: #bbf7d0; }
+
+.status-btn.not-paid { background-color: #fee2e2; color: #dc2626; }
+.status-btn.not-paid:hover { background-color: #fecaca; }
+
+.status-btn.alert-status { cursor: default; }
+.status-btn.alert-normal { background-color: #dcfce7; color: #15803d; }
+.status-btn.alert-high { background-color: #fef3c7; color: #a16207; }
+.status-btn.alert-critical { background-color: #fee2e2; color: #b91c1c; }
+
+/* --- ACCOUNT STATUS COLORS --- */
+.status-btn.active-status { background-color: #dcfce7; color: #16a34a; }
+.status-btn.active-status:hover { background-color: #bbf7d0; }
+
+.status-btn.inactive-status { background-color: #f3f4f6; color: #6b7280; }
+.status-btn.inactive-status:hover { background-color: #e5e7eb; }
+
+/* ==========================================
+   Dropdown Menu
+   ========================================== */
+.status-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 8px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    display: none;
+    min-width: 140px;
+    overflow: hidden;
+}
+
+.status-menu.show {
+    display: block;
+}
+
+.status-menu-item {
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-main);
+    transition: background 0.2s;
+}
+
+.status-menu-item:hover {
+    background-color: var(--bg-main);
+}
+
+.menu-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+.menu-dot.pending { background-color: #ca8a04; }
+.menu-dot.paid { background-color: #16a34a; }
+.menu-dot.not-paid { background-color: #dc2626; }
+
+/* Center align the table cells vertically */
+.admin-table td {
+    vertical-align: middle;
+}
+
+/* Clickable Row Effect */
+.clickable-row {
+    transition: background-color 0.2s;
+}
+.clickable-row:hover {
+    background-color: rgba(59, 130, 246, 0.05); /* Light blue tint on hover */
+}
+
+/* ==========================================
+   User Statistics Dashboard
+   ========================================== */
+.admin-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.admin-stat-card {
+    background-color: var(--bg-card);
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow-card);
+    border-left-width: 4px;
+}
+
+/* Colored borders */
+.border-success { border-left-color: #22c55e; }
+.border-warning { border-left-color: #eab308; }
+.border-danger { border-left-color: #ef4444; }
+
+.stat-icon {
+    font-size: 24px;
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+}
+
+.stat-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-heading);
+    font-family: 'Outfit', sans-serif;
+}
+
+/* Text Colors */
+.text-green { color: #16a34a; }
+.text-yellow { color: #ca8a04; }
+.text-red { color: #dc2626; }
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .admin-stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 768px) {
+    .admin-stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ==========================================
+   User Details Modal
+   ========================================== */
+.user-modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.user-modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.user-modal-box {
+    background-color: var(--bg-card);
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.user-modal-overlay.show .user-modal-box {
+    transform: translateY(0);
+}
+
+.user-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-main);
+    border-radius: 16px 16px 0 0;
+}
+
+.user-modal-header h2 {
+    font-size: 20px;
+    color: var(--text-heading);
+    margin: 0;
+    font-family: 'Outfit', sans-serif;
+}
+
+.close-modal-btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: var(--text-muted);
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.close-modal-btn:hover {
+    color: #ef4444;
+}
+
+.user-modal-body {
+    padding: 24px;
+}
+
+.user-profile-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.user-avatar-large {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, #3b82f6, #0ea5e9);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+}
+
+.user-profile-header h3 {
+    margin: 0 0 4px 0;
+    font-size: 22px;
+    color: var(--text-heading);
+}
+
+.user-profile-header p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.user-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.info-item {
+    background-color: var(--bg-main);
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.info-item label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.info-item strong {
+    font-size: 15px;
+    color: var(--text-heading);
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerts - AI Energy Monitor</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- External CSS Links -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/alerts.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/notifications.css">
+</head>
+<body>
+
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <span class="logo-text">SECMS</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <i class="fas fa-chart-pie" style="margin-right: 10px;"></i> Dashboard
+            </a>
+            <a href="consumption.html" class="nav-item">
+                <i class="fas fa-bolt" style="margin-right: 10px;"></i> Consumption
+            </a>
+            <a href="alerts.html" class="nav-item active">
+                <i class="fas fa-bell" style="margin-right: 10px;"></i> Alerts
+            </a>
+            <a href="reports.html" class="nav-item">
+                <i class="fas fa-file-alt" style="margin-right: 10px;"></i> Reports
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="#" class="nav-item logout-btn" id="logoutBtn">
+                <i class="fas fa-sign-out-alt" style="margin-right: 10px; color: #ef4444;"></i> <span style="color: #ef4444;">Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <header class="top-navbar">
+            <h1 class="page-title">Energy Monitoring</h1>
+            <div class="user-profile" onclick="window.location.href='profile.html'" style="cursor: pointer;">
+                <div class="profile-info">
+                    <div class="avatar" id="userAvatar">E</div>
+                    <div class="user-details">
+                        <span class="user-name" id="userName">Loading...</span>
+                        <span class="user-email" id="userEmail">loading@example.com</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <div class="welcome-section" style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
+                <img src="https://cdn-icons-png.flaticon.com/512/3142/3142047.png" alt="Alerts" style="width: 40px; height: 40px;">
+                <div>
+                    <h2>Notifications</h2>
+                    <p>Monitor system notifications and warnings</p>
+                </div>
+            </div>
+
+            <div class="alert-summary-grid">
+                <div class="alert-summary-card" data-filter="critical" id="filter-critical">
+                    <div class="summary-icon"><i class="fas fa-exclamation-circle" style="color: #ef4444;"></i></div>
+                    <p class="summary-label">Critical Alerts</p>
+                    <h3 class="summary-value text-red" id="count-critical">0</h3>
+                </div>
+                <div class="alert-summary-card" data-filter="warning" id="filter-warning">
+                    <div class="summary-icon"><i class="fas fa-exclamation-triangle" style="color: #eab308;"></i></div>
+                    <p class="summary-label">Warnings</p>
+                    <h3 class="summary-value text-yellow" id="count-warning">0</h3>
+                </div>
+                <div class="alert-summary-card" data-filter="info" id="filter-info">
+                    <div class="summary-icon"><i class="fas fa-info-circle" style="color: #3b82f6;"></i></div>
+                    <p class="summary-label">Info</p>
+                    <h3 class="summary-value text-blue" id="count-info">0</h3>
+                </div>
+                <div class="alert-summary-card" data-filter="success" id="filter-success">
+                    <div class="summary-icon"><i class="fas fa-check-circle" style="color: #22c55e;"></i></div>
+                    <p class="summary-label">Success</p>
+                    <h3 class="summary-value text-green" id="count-success">0</h3>
+                </div>
+            </div>
+
+            <div class="alert-list" id="alert-list-container"></div>
+        </div>
+    </main>
+
+    <!-- ALERT DETAILS MODAL -->
+    <div class="alert-modal-overlay" id="alertDetailModal">
+        <div class="alert-modal-box">
+            <div class="alert-modal-header">
+                <div class="alert-modal-icon" id="modalAlertIcon"></div>
+                <button class="alert-modal-close" id="closeAlertModal">&times;</button>
+            </div>
+            <div class="alert-modal-body">
+                <h2 class="alert-modal-title" id="modalAlertTitle">Alert Title</h2>
+                <span class="alert-modal-badge" id="modalAlertBadge">Critical</span>
+                <p class="alert-modal-desc" id="modalAlertDesc">Full description here...</p>
+                <div class="alert-modal-meta" id="modalAlertMeta">Meta details...</div>
+            </div>
+            <div class="alert-modal-footer">
+                <button class="alert-modal-btn" id="modalOkayBtn">Okay, Got it</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script/api.js"></script>
+    <script src="script/dashboard.js"></script>
+    <script src="script/theme.js"></script>
+    <script src="script/alerts.js"></script>
+    <script src="script/notifications.js"></script>
+</body>
+</html>

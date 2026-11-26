@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initial Setup - SECMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/onboarding.css">
+    <link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+    <nav class="onboarding-nav">
+        <a href="index.html" class="onboarding-logo">SECMS</a>
+        <button type="button" id="onboardingLogout" class="onboarding-logout">Log out</button>
+    </nav>
+
+    <main class="onboarding-main">
+        <section class="onboarding-card" aria-labelledby="onboardingTitle">
+            <div class="onboarding-intro">
+                <span class="onboarding-step">ACCOUNT SETUP</span>
+                <h1 id="onboardingTitle">Let&#8217;s set up your energy profile</h1>
+                <p>Enter your meter and household details to personalize your dashboard and billing insights.</p>
+                <p class="onboarding-user" id="onboardingUserName"></p>
+            </div>
+
+            <form id="onboardingForm" novalidate>
+                <div class="onboarding-fields">
+                    <div class="onboarding-field">
+                        <label for="previousReading">Previous reading <span>(kWh)</span></label>
+                        <input id="previousReading" name="previousReading" type="number" min="0" step="any" inputmode="decimal" required>
+                        <small class="field-error" id="previousReadingError"></small>
+                    </div>
+                    <div class="onboarding-field">
+                        <label for="presentReading">Present reading <span>(kWh)</span></label>
+                        <input id="presentReading" name="presentReading" type="number" min="0" step="any" inputmode="decimal" required>
+                        <small class="field-error" id="presentReadingError"></small>
+                    </div>
+                    <div class="onboarding-field">
+                        <label for="ratePerKwh">Total rate per kWh <span>(PHP)</span></label>
+                        <input id="ratePerKwh" name="ratePerKwh" type="number" min="0" step="any" inputmode="decimal" required>
+                        <small class="field-error" id="ratePerKwhError"></small>
+                    </div>
+                    <div class="onboarding-field">
+                        <label for="phoneNumber">Phone number</label>
+                        <input id="phoneNumber" name="phoneNumber" type="tel" autocomplete="tel" placeholder="+63 912 345 6789" pattern="\+?[0-9][0-9\s.\x2d]{6,24}" required>
+                        <small class="field-hint">Include your country code if applicable.</small>
+                        <small class="field-error" id="phoneNumberError"></small>
+                    </div>
+                    <div class="onboarding-field onboarding-field-wide">
+                        <label for="completeAddress">Complete address</label>
+                        <textarea id="completeAddress" name="completeAddress" rows="3" maxlength="500" autocomplete="street-address" placeholder="House / unit, street, barangay, city or municipality, province" required></textarea>
+                        <small class="field-error" id="completeAddressError"></small>
+                    </div>
+                    <div class="onboarding-field">
+                        <label for="electricityProvider">Electricity provider</label>
+                        <select id="electricityProvider" name="electricityProvider" required>
+                            <option value="">Choose your provider</option>
+                            <option>Meralco</option>
+                            <option>OEDC (Olongapo Electricity Distribution Company)</option>
+                            <option>ZAMECO I</option>
+                            <option>ZAMECO II</option>
+                            <option>Subic EnerZone</option>
+                            <option>AEC (Angeles Electric Corporation)</option>
+                            <option>PELCO I</option>
+                            <option>PELCO II</option>
+                            <option>PELCO III</option>
+                            <option>SFELAPCO</option>
+                            <option>Clark Electric (CEDC)</option>
+                            <option>PENELCO</option>
+                            <option>TEI (Tarlac Electric Inc.)</option>
+                            <option>TARELCO I</option>
+                            <option>TARELCO II</option>
+                            <option>NEECO I</option>
+                            <option>NEECO II - Area 1</option>
+                            <option>NEECO II - Area 2</option>
+                            <option>CELCOR</option>
+                            <option>SAJELCO</option>
+                            <option>AURELCO</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <small class="field-error" id="electricityProviderError"></small>
+                    </div>
+                    <div class="onboarding-field" id="otherProviderField" hidden>
+                        <label for="otherProvider">Provider name</label>
+                        <input id="otherProvider" name="otherProvider" type="text" maxlength="120" placeholder="Enter your electricity provider">
+                        <small class="field-error" id="otherProviderError"></small>
+                    </div>
+                </div>
+
+                <div class="onboarding-error" id="onboardingError" role="alert" hidden></div>
+                <div class="onboarding-actions">
+                    <button type="submit" class="onboarding-submit" id="onboardingSubmit">Save and continue to dashboard</button>
+                    <p>Your details are saved to your SECMS account.</p>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <script src="script/api.js"></script>
+    <script src="script/onboarding.js"></script>
+    <script src="script/theme.js"></script>
+</body>
+</html>

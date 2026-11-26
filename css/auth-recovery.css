@@ -1,0 +1,25 @@
+.auth-recovery-card { min-height: 480px; }
+.auth-recovery-card .login-form-side { justify-content: center; }
+.recovery-message {
+    margin: -6px 0 18px;
+    color: #2563eb;
+    font-size: 13px;
+    line-height: 1.5;
+}
+.recovery-message.error { color: #b42318; }
+.local-reset-link {
+    margin: -6px 0 18px;
+    padding: 12px;
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    background: #eff6ff;
+    overflow-wrap: anywhere;
+    font-size: 12px;
+}
+.local-reset-link a { color: #1d4ed8; font-weight: 600; }
+html[data-theme="dark"] .local-reset-link { background: #12223a; border-color: #315077; }
+html[data-theme="dark"] .local-reset-link a { color: #93c5fd; }
+@media (max-width: 760px) {
+    .auth-recovery-card { min-height: 0; }
+    .auth-recovery-card .login-form-side { padding: 32px 24px; }
+}

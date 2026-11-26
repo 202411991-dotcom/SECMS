@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumption - AI Energy Monitor</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- External CSS Links -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/consumption.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/notifications.css">
+</head>
+<body>
+
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <span class="logo-text">SECMS</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <i class="fas fa-chart-pie" style="margin-right: 10px;"></i> Dashboard
+            </a>
+            <a href="consumption.html" class="nav-item active">
+                <i class="fas fa-bolt" style="margin-right: 10px;"></i> Consumption
+            </a>
+            <a href="alerts.html" class="nav-item">
+                <i class="fas fa-bell" style="margin-right: 10px;"></i> Alerts
+            </a>
+            <a href="reports.html" class="nav-item">
+                <i class="fas fa-file-alt" style="margin-right: 10px;"></i> Reports
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="#" class="nav-item logout-btn" id="logoutBtn">
+                <i class="fas fa-sign-out-alt" style="margin-right: 10px; color: #ef4444;"></i> <span style="color: #ef4444;">Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <header class="top-navbar">
+            <h1 class="page-title">Energy Monitoring</h1>
+            <div class="user-profile" onclick="window.location.href='profile.html'" style="cursor: pointer;">
+                <div class="profile-info">
+                    <div class="avatar" id="userAvatar">E</div>
+                    <div class="user-details">
+                        <span class="user-name" id="userName">Loading...</span>
+                        <span class="user-email" id="userEmail">loading@example.com</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <div class="page-header-row">
+                <div class="welcome-section" style="display: flex; align-items: center; gap: 12px;">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2917/2917995.png" alt="Energy" style="width: 40px; height: 40px;">
+                    <div>
+                        <h2>Energy Consumption</h2>
+                        <p>Real-time and historical usage analysis</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-panel">
+                <div class="filter-group">
+                    <label>Time Range</label>
+                    <select class="time-select" id="time-range-select">
+                        <option value="7">Last 7 Days</option>
+                        <option value="30">Last 30 Days</option>
+                        <option value="month" selected>This Month</option>
+                    </select>
+                </div>
+                <button class="more-filters-btn"><i class="fas fa-filter"></i> More<br>Filters</button>
+            </div>
+
+            <div class="summary-cards-grid">
+                <div class="summary-card">
+                    <div class="card-content">
+                        <p class="card-label">Current Usage</p>
+                        <h3 class="card-value" id="cons-current-usage">0.00 kW</h3>
+                    </div>
+                    <div class="card-icon text-orange"><i class="fas fa-bolt"></i></div>
+                </div>
+                <div class="summary-card">
+                    <div class="card-content">
+                        <p class="card-label">Today's Total</p>
+                        <h3 class="card-value" id="cons-today-total">0.00 kWh</h3>
+                    </div>
+                    <div class="card-icon text-purple"><i class="fas fa-chart-bar"></i></div>
+                </div>
+                <div class="summary-card">
+                    <div class="card-content">
+                        <p class="card-label">Estimated Cost</p>
+                        <h3 class="card-value text-blue" id="cons-estimated-cost">&#8369;0.00</h3>
+                    </div>
+                    <div class="card-icon text-yellow"><i class="fas fa-money-bill-wave"></i></div>
+                </div>
+                <div class="summary-card">
+                    <div class="card-content">
+                        <p class="card-label">vs Last Month</p>
+                        <h3 class="card-value text-green" id="cons-vs-last-month">0%</h3>
+                    </div>
+                    <div class="card-icon text-red"><i class="fas fa-chart-line"></i></div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-box">
+                    <h3 class="chart-title">Monthly Consumption (kWh)</h3>
+                    <div class="line-chart-container" style="position: relative;">
+                        <svg viewBox="0 0 500 250" class="line-chart-svg" id="monthly-line-chart">
+                            <line x1="40" y1="50" x2="480" y2="50" class="grid-line" />
+                            <line x1="40" y1="100" x2="480" y2="100" class="grid-line" />
+                            <line x1="40" y1="150" x2="480" y2="150" class="grid-line" />
+                            <line x1="40" y1="200" x2="480" y2="200" class="grid-line" />
+                            <text x="10" y="55" class="axis-label">300</text>
+                            <text x="10" y="105" class="axis-label">200</text>
+                            <text x="10" y="155" class="axis-label">100</text>
+                            <text x="10" y="205" class="axis-label">0</text>
+                            <text x="80" y="235" class="axis-label" text-anchor="middle">Jul</text>
+                            <text x="160" y="235" class="axis-label" text-anchor="middle">Aug</text>
+                            <text x="240" y="235" class="axis-label" text-anchor="middle">Sep</text>
+                            <text x="320" y="235" class="axis-label" text-anchor="middle">Oct</text>
+                            <text x="400" y="235" class="axis-label" text-anchor="middle">Nov</text>
+                            <text x="480" y="235" class="axis-label" text-anchor="middle">Dec</text>
+                            <g id="dynamic-line-group"></g>
+                        </svg>
+                        <div id="line-tooltip" class="chart-tooltip" role="tooltip" aria-hidden="true"></div>
+                    </div>
+                </div>
+
+                <div class="chart-box">
+                    <h3 class="chart-title">Daily Cost (&#8369;)</h3>
+                    <div class="bar-chart-container" style="position: relative;">
+                        <div class="y-axis-labels" id="daily-cost-y-axis"></div>
+                        <div class="bars-wrapper" id="daily-cost-bars-wrapper"></div>
+                        <div id="bar-tooltip" style="position: absolute; background: var(--bg-sidebar); color: white; padding: 8px 12px; border-radius: 6px; font-size: 12px; pointer-events: none; opacity: 0; transition: opacity 0.2s; z-index: 10; transform: translate(-50%, -100%); white-space: nowrap;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script/api.js"></script>
+    <script src="script/dashboard.js"></script>
+    <script src="script/theme.js"></script>
+    <script src="script/notifications.js"></script>
+</body>
+</html>

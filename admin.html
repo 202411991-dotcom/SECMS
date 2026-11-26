@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - SECMS</title>
+    
+    <!-- SECURITY CHECK -->
+    <script>
+        if (!sessionStorage.getItem('secmsAdminToken')) {
+            alert('Access Denied. Please log in as an administrator.');
+            window.location.href = 'admin-login.html';
+        }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/admin-users.css">
+    <link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" style="background-color: #1e1e2d;">
+        <div class="sidebar-header">
+            <div class="logo-icon" style="background-color: #ef4444;"><i class="fas fa-shield-alt"></i></div>
+            <span class="logo-text">Admin Portal</span>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" onclick="return switchTab('users', this)">
+                <i class="fas fa-users" style="margin-right: 10px;"></i> Manage Users
+            </a>
+            <a href="#" class="nav-item" onclick="return switchTab('reports', this)">
+                <i class="fas fa-clipboard-list" style="margin-right: 10px;"></i> System Logs
+            </a>
+            <a href="#" class="nav-item" onclick="return switchTab('notifications', this)">
+                <i class="fas fa-bullhorn" style="margin-right: 10px;"></i> Send Alerts
+            </a>
+                                </nav>
+
+        <div class="sidebar-footer">
+            <a href="#" class="nav-item logout-btn" id="adminLogoutBtn">
+                <i class="fas fa-sign-out-alt" style="margin-right: 10px; color: #ef4444;"></i> <span style="color: #ef4444;">Exit Admin</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <header class="top-navbar">
+            <h1 class="page-title" id="pageTitle">Manage Users</h1>
+            <div class="user-profile">
+                <div class="profile-info">
+                    <div class="avatar" style="background-color: #ef4444;">A</div>
+                    <div class="user-details">
+                        <span class="user-name">System Admin</span>
+                        <span class="user-email">admin@secms.com</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            
+            <!-- TAB 1: USERS -->
+            <div id="tab-users" class="admin-tab">
+                <div class="welcome-section" style="display:flex;align-items:center;justify-content:space-between;gap:20px;">
+                    <div>
+                        <h2>Registered Users</h2>
+                        <p>Overview of all accounts currently saved in the system. Click a row to view details.</p>
+                    </div>
+                    <button type="button" class="btn-primary" id="refreshUsersBtn">Refresh users</button>
+                </div>
+
+                <div class="admin-stats-grid">
+                    <div class="admin-stat-card">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-info"><p class="stat-label">Total Users</p><h3 class="stat-value" id="stat-total-users">0</h3></div>
+                    </div>
+                    <div class="admin-stat-card border-warning">
+                        <div class="stat-icon text-yellow"><i class="fas fa-hourglass-half"></i></div>
+                        <div class="stat-info"><p class="stat-label">Pending</p><h3 class="stat-value text-yellow" id="stat-pending-users">0</h3></div>
+                    </div>
+                    <div class="admin-stat-card border-success">
+                        <div class="stat-icon text-green"><i class="fas fa-check-circle"></i></div>
+                        <div class="stat-info"><p class="stat-label">Active Accounts</p><h3 class="stat-value text-green" id="stat-active-users">0</h3></div>
+                    </div>
+                    <div class="admin-stat-card border-danger">
+                        <div class="stat-icon text-red"><i class="fas fa-ban"></i></div>
+                        <div class="stat-info"><p class="stat-label">Inactive Accounts</p><h3 class="stat-value text-red" id="stat-inactive-users">0</h3></div>
+                    </div>
+                </div>
+
+                <div class="admin-card">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Account No.</th>
+                                <th>Email</th>
+                                <th>Alert Status</th>
+                                <th>Account Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 2: SYSTEM LOGS -->
+            <div id="tab-reports" class="admin-tab" style="display: none;">
+                <div class="welcome-section">
+                    <h2>System Activity Logs</h2>
+                    <p>Real-time log of all administrative actions performed in the system.</p>
+                </div>
+                <div class="admin-card">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Action Type</th>
+                                <th>Target User</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody id="system-logs-body"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 3: NOTIFICATIONS -->
+            <div id="tab-notifications" class="admin-tab" style="display: none;">
+                <div class="welcome-section">
+                    <h2>Send Alert Notification</h2>
+                    <p>Broadcast a system notice to a specific user or everyone.</p>
+                </div>
+                
+                <div class="admin-card">
+                    <form id="alert-form" class="admin-form">
+                        <div class="form-group">
+                            <label>Target User</label>
+                            <select id="alert-target" required>
+                                <option value="all">&#128227; All Users (Broadcast)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Alert Type</label>
+                            <select id="alert-type" required>
+                                <option value="critical">Critical (Disconnected Invoices)</option>
+                                <option value="warning">Warning</option>
+                                <option value="info">Info</option>
+                                <option value="success">Success</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" id="alert-title" placeholder="e.g., Disconnected Invoice #4921" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="alert-desc" rows="3" placeholder="Details about the alert..." required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                        <button type="submit" class="btn-primary">Send Notification</button>
+                    </form>
+                </div>
+
+                <div class="welcome-section" style="margin-top: 40px;">
+                    <h2>Alert History</h2>
+                    <p>Log of all notifications sent to users.</p>
+                </div>
+                <div class="admin-card">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Date Sent</th>
+                                <th>Target User</th>
+                                <th>Type</th>
+                                <th>Title</th>
+                                <th>Message</th>
+                            </tr>
+                        </thead>
+                        <tbody id="alert-history-body"></tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- USER DETAILS MODAL -->
+    <div class="user-modal-overlay" id="userDetailModal">
+        <div class="user-modal-box">
+            <div class="user-modal-header">
+                <h2>User Details</h2>
+                <button class="close-modal-btn" id="closeUserModalBtn">&times;</button>
+            </div>
+            <div class="user-modal-body">
+                <div class="user-profile-header">
+                    <div class="user-avatar-large" id="modalUserAvatar">J</div>
+                    <div>
+                        <h3 id="modalUserName">John Doe</h3>
+                        <p id="modalUserEmail">john@example.com</p>
+                    </div>
+                </div>
+                <div class="user-info-grid">
+                    <div class="info-item"><label>Account Number</label><strong id="modalUserAccount">-</strong></div>
+                    <div class="info-item"><label>Account Status</label><strong id="modalUserAccStatus">-</strong></div>
+                    <div class="info-item"><label>Alert Status</label><strong id="modalUserAlertStatus">-</strong></div>
+                    <div class="info-item"><label>Member Since</label><strong id="modalUserDate">-</strong></div>
+                    <div class="info-item"><label>Electricity Provider</label><strong id="modalUserProvider">-</strong></div>
+                    <div class="info-item"><label>Complete Address</label><strong id="modalUserAddress">-</strong></div>
+                    <div class="info-item"><label>Phone Number</label><strong id="modalUserPhone">-</strong></div>
+                </div>
+                <h4 style="margin-top: 24px; margin-bottom: 12px; color: var(--text-heading); border-bottom: 1px solid var(--border-color); padding-bottom: 8px;"><i class="fas fa-bolt"></i> Latest Meter & Billing Data</h4>
+                <div class="user-info-grid">
+                    <div class="info-item"><label>Previous Reading</label><strong id="modalUserPrev">0.00 kWh</strong></div>
+                    <div class="info-item"><label>Present Reading</label><strong id="modalUserPresent">0.00 kWh</strong></div>
+                    <div class="info-item"><label>Total kWh Used</label><strong id="modalUserKwh">0.00 kWh</strong></div>
+                    <div class="info-item"><label>Total Rate</label><strong id="modalUserRate">&#8369;0.0000</strong></div>
+                    <div class="info-item" style="grid-column: span 2; background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.2);">
+                        <label>Estimated Cost (Bill)</label>
+                        <strong style="font-size: 20px; color: #10b981;" id="modalUserCost">&#8369;0.00</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script/api.js"></script>
+    <script src="script/admin.js"></script>
+    <script src="script/theme.js"></script>
+</body>
+</html>
