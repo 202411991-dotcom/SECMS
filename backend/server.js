@@ -42,6 +42,11 @@ app.get('/api/health', (req, res) => {
     });
 });
 
+app.use('/api', (req, res, next) => {
+    if (req.path === '/auth/admin-login' || mongoose.connection.readyState === 1) return next();
+    res.status(503).json({ error: 'The database is unavailable. Check the database connection and try again.' });
+});
+
 app.use('/api/readings', readingsRouter);
 app.use('/api/notifications', notificationsRouter);
 app.use('/api/auth', authRouter);
@@ -87,9 +92,23 @@ app.use((error, req, res, next) => {
 });
 
 let server;
+let shuttingDown = false;
 
-async function startServer() {
-    await connectDatabase();
+async function connectDatabaseWithRetry() {
+    let retryDelay = 5000;
+    while (!shuttingDown && mongoose.connection.readyState !== 1) {
+        try {
+            await connectDatabase();
+        } catch (error) {
+            console.error(`[startup] Database connection failed (${error.name || 'Error'}); retrying in ${Math.round(retryDelay / 1000)} seconds`);
+        }
+        if (mongoose.connection.readyState === 1 || shuttingDown) return;
+        await new Promise((resolve) => setTimeout(resolve, retryDelay));
+        retryDelay = Math.min(retryDelay * 2, 60000);
+    }
+}
+
+function startServer() {
     server = app.listen(port);
     server.once('listening', () => {
         console.info(`[server] SECMS is available at http://localhost:${port}`);
@@ -103,9 +122,11 @@ async function startServer() {
         await closeDatabase().catch(() => {});
         process.exitCode = 1;
     });
+    void connectDatabaseWithRetry();
 }
 
 async function shutdown(signal) {
+    shuttingDown = true;
     console.info(`[server] ${signal} received; closing gracefully`);
     if (server) {
         await new Promise((resolve) => server.close(resolve));
@@ -117,8 +138,4 @@ async function shutdown(signal) {
 process.once('SIGINT', () => shutdown('SIGINT'));
 process.once('SIGTERM', () => shutdown('SIGTERM'));
 
-startServer().catch(async (error) => {
-    console.error(`[startup] Could not start SECMS: ${error.name || 'UnknownError'}`);
-    await closeDatabase().catch(() => {});
-    process.exit(1);
-});
+startServer();
