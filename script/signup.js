@@ -17,9 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const result = await window.SecmsAPI.request('/auth/register', {
                 method: 'POST',
                 body: {
-                    fullName: document.getElementById('fullname').value,
-                    accountNumber: document.getElementById('account-number').value,
-                    email: document.getElementById('email').value,
+                    fullName: document.getElementById('fullname').value.trim(),
+                    accountNumber: document.getElementById('account-number').value.trim(),
+                    email: document.getElementById('email').value.trim(),
                     password: document.getElementById('password').value
                 }
             });
