@@ -24,10 +24,10 @@
         try {
             response = await fetch(`${API_ROOT}${path}`, { ...fetchOptions, headers, body });
 
-            // A separate local static server commonly returns an HTML 404 for /api.
-            // Retry that response against the Express API used by the project.
+            // A separate local static server may return either HTML or JSON for /api.
+            // Retry any local 404 against the Express API used by the project.
             if (isLocalDevelopment && !window.SECMS_API_BASE_URL &&
-                response.status === 404 && !response.headers.get('content-type')?.includes('application/json') &&
+                response.status === 404 &&
                 API_ROOT !== LOCAL_API_FALLBACK) {
                 response = await fetch(`${LOCAL_API_FALLBACK}${path}`, { ...fetchOptions, headers, body });
             }
