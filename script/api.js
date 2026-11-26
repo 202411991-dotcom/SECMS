@@ -1,5 +1,8 @@
 (() => {
-    const API_ROOT = `${window.location.origin}/api`;
+    const pageOrigin = window.location.origin;
+    const isLocalDevelopment = pageOrigin === 'null' || ['localhost', '127.0.0.1', '[::1]'].includes(window.location.hostname);
+    const API_ROOT = (window.SECMS_API_BASE_URL || `${pageOrigin}/api`).replace(/\/$/, '');
+    const LOCAL_API_FALLBACK = 'http://localhost:3000/api';
     const USER_TOKEN_KEY = 'secmsAuthToken';
     const ADMIN_TOKEN_KEY = 'secmsAdminToken';
 
@@ -16,20 +19,33 @@
             body = JSON.stringify(body);
         }
 
+        const { token: _token, ...fetchOptions } = options;
         let response;
         try {
-            response = await fetch(`${API_ROOT}${path}`, {
-                ...options,
-                headers,
-                body
-            });
+            response = await fetch(`${API_ROOT}${path}`, { ...fetchOptions, headers, body });
+
+            // A separate local static server commonly returns an HTML 404 for /api.
+            // Retry that response against the Express API used by the project.
+            if (isLocalDevelopment && !window.SECMS_API_BASE_URL &&
+                response.status === 404 && !response.headers.get('content-type')?.includes('application/json') &&
+                API_ROOT !== LOCAL_API_FALLBACK) {
+                response = await fetch(`${LOCAL_API_FALLBACK}${path}`, { ...fetchOptions, headers, body });
+            }
         } catch {
-            throw new Error('Cannot connect to SECMS. Check that the server is running and try again.');
+            if (isLocalDevelopment && !window.SECMS_API_BASE_URL && API_ROOT !== LOCAL_API_FALLBACK) {
+                try {
+                    response = await fetch(`${LOCAL_API_FALLBACK}${path}`, { ...fetchOptions, headers, body });
+                } catch {
+                    throw new Error('Cannot connect to SECMS. Start the backend server and try again.');
+                }
+            } else {
+                throw new Error('Cannot connect to SECMS. Check that the server is running and try again.');
+            }
         }
 
         const result = await response.json().catch(() => ({}));
         if (!response.ok) {
-            const error = new Error(result.error || 'The request could not be completed.');
+            const error = new Error(result.error || `SECMS returned an unexpected response (HTTP ${response.status}). Check the API server and try again.`);
             error.status = response.status;
             throw error;
         }
